@@ -1,0 +1,19 @@
+.invitations-container { padding: 2rem; max-width: 800px; margin: 0 auto; color: white; }
+.loading-msg, .no-invit { text-align: center; font-size: 1.2rem; margin-top: 2rem; }
+.invit-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.invit-card {
+    background: white;
+    color: #333;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.budget-name { color: var(--electric-sapphire); font-weight: bold; font-size: 1.1rem; }
+.invit-actions { display: flex; gap: 0.5rem; }
+
+.accept-btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.reject-btn { background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }

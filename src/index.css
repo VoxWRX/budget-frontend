@@ -1,0 +1,39 @@
+/* src/index.css */
+
+:root {
+  /* Ta superbe palette */
+  --neon-pink: #f72585ff;
+  --raspberry-plum: #b5179eff;
+  --indigo-bloom: #7209b7ff;
+  --ultrasonic-blue: #560badff;
+  --true-azure: #480ca8ff;
+  --vivid-royal: #3a0ca3ff;
+  --bright-indigo: #3f37c9ff;
+  --electric-sapphire: #4361eeff;
+  --blue-energy: #4895efff;
+  --sky-aqua: #4cc9f0ff;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* --- VOTRE NOUVEAU FOND --- */
+  background: linear-gradient(
+    to bottom, 
+    var(--true-azure), 
+    var(--electric-sapphire)
+  );
+  background-attachment: fixed; /* Empêche le dégradé de bouger au scroll */
+  min-height: 100vh;
+  color: var(--text-primary); /* Couleur de texte par défaut */
+}
+
+  /* On peut aussi définir des couleurs de base pour le texte et le fond */
+  --background-page: #f0f2f5;
+  --background-form: #ffffff;
+  --text-primary: #333;
+}

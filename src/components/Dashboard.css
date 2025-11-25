@@ -1,0 +1,207 @@
+/* src/components/Dashboard.css */
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Aligner en haut pour le sous-titre */
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--electric-sapphire);
+    padding-bottom: 1rem;
+    color: #fff; /* Texte blanc pour contraster avec le dégradé */
+}
+
+/* Nouveau style pour le conteneur du titre */
+.header-title {
+    flex-grow: 1; /* Prend l'espace disponible */
+}
+
+.header-title h1 {
+    color: #fff; /* Titre principal en blanc */
+    margin: 0;
+}
+
+.header-title p {
+    margin: 0;
+    font-size: 1rem;
+    color: #eee; /* Sous-titre en blanc cassé */
+}
+
+.header-actions { display: flex; gap: 1rem; align-items: center; }
+.profile-link-btn { text-decoration: none; color: white; font-weight: bold; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 4px; }
+.profile-link-btn:hover { background: rgba(255,255,255,0.3); }
+
+/* Pour pouvoir positionner la bulle par rapport au bouton */
+.relative-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* La bulle rouge */
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff4757; /* Rouge vif */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%; /* Cercle parfait */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--electric-sapphire); /* Petite bordure pour le détacher */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+    /* Petite animation d'apparition */
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+/* Ajustement pour le mode sombre si nécessaire */
+body.dark-mode .notification-badge {
+    border-color: #1e1e1e;
+}
+
+.budget-creator {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+}
+
+.budget-creator h2 {
+    color: var(--indigo-bloom); /* On reprend la couleur de nos titres */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-shadow: none; /* Pas besoin d'ombre sur fond blanc */
+}
+
+.budget-creator form {
+    display: flex;
+    gap: 1rem;
+}
+
+.budget-creator input {
+    flex-grow: 1; /* L'input prend le plus de place possible */
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.budget-creator button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--electric-sapphire);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.budget-creator button:hover {
+    background-color: var(--bright-indigo);
+}
+
+/* On change le nom du sélecteur pour éviter un conflit */
+.budget-list-title {
+  color: #ffffff;
+  text-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.7), 
+    -1px -1px 2px rgba(0, 0, 0, 0.7), 
+    1px -1px 2px rgba(0, 0, 0, 0.7), 
+    -1px 1px 2px rgba(0, 0, 0, 0.7);
+  margin-bottom: 1.5rem;
+}
+
+.budgets-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    
+    /* --- CORRECTION ICI --- */
+    /* On enlève les puces de liste que le <Link> pourrait créer */
+    list-style: none;
+    padding: 0;
+}
+
+/* On réutilise le style du bouton de déconnexion, mais on peut le surcharger ici si besoin */
+.logout-button {
+    margin-top: 0; /* On enlève la marge qu'on avait mise dans App.css */
+}
+
+.budget-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out; /* Transition plus complète */
+    display: block; /* Force le lien à se comporter comme un bloc (essentiel pour la grille) */
+    text-decoration: none; /* Enlève le soulignement bleu */
+}
+
+.budget-card h3 {
+    margin: 0;
+    color: var(--bright-indigo); /* La couleur du texte du lien */
+}
+
+/* Voici le NOUVEAU style de survol */
+.budget-card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px); /* Ajoute un léger "soulèvement" */
+    
+    /* On utilise une couleur de ta palette pour le fond */
+    background: var(--sky-aqua); 
+}
+
+/* On s'assure que le titre reste lisible */
+.budget-card:hover h3 {
+    color: var(--vivid-royal);
+}
+
+/* Pour positionner le bouton delete, on utilise flexbox dans la carte */
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-budget-btn {
+    background: transparent;
+    border: 1px solid #ffcccc;
+    color: #ff4d4d;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.delete-budget-btn:hover {
+    background: #ff4d4d;
+    color: white;
+    border-color: #ff4d4d;
+}

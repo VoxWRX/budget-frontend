@@ -1,0 +1,91 @@
+/* src/components/AuthPage.css */
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* On utilise notre bleu le plus foncé comme fond */
+    background-color: var(--true-azure);
+}
+
+.auth-form {
+    /* Un fond blanc classique pour le formulaire */
+    background: var(--background-form);
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+.auth-form h2 {
+    margin-bottom: 1.5rem;
+    /* Un des violets pour le titre */
+    color: var(--indigo-bloom);
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    color: var(--text-primary);
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    /* Un beau bleu pour le bouton */
+    background-color: var(--electric-sapphire);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.auth-form button:hover {
+    /* Un bleu plus foncé au survol */
+    background-color: var(--bright-indigo);
+}
+
+.toggle-link {
+    margin-top: 1.5rem;
+    color: var(--electric-sapphire);
+    cursor: pointer;
+    font-size: 0.9rem;
+    
+    /* --- NOUVEAUX STYLES POUR LE BOUTON --- */
+    background: none;      /* Pas de fond */
+    border: none;          /* Pas de bordure */
+    font-family: inherit;  /* Garde la même police */
+    width: 100%;           /* Prend toute la largeur */
+    padding: 0.5rem;       /* Un peu de zone de clic */
+    text-decoration: none;
+}
+
+.toggle-link:hover {
+    text-decoration: underline;
+}
+
+/* Indicateur de focus pour l'accessibilité (clavier) */
+.toggle-link:focus {
+    outline: 2px solid var(--electric-sapphire);
+    border-radius: 4px;
+    background-color: rgba(67, 97, 238, 0.1);
+}
+
+.error-message {
+    color: var(--neon-pink); /* On utilise ta palette ! */
+    background-color: rgba(247, 37, 133, 0.1);
+    border: 1px solid var(--neon-pink);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
