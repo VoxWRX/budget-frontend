@@ -42,16 +42,11 @@ function BudgetDetailPage() {
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteStatus, setInviteStatus] = useState(""); // pour afficher le succès/erreur
 
-  useEffect(() => {
-    loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [budgetId]);
-
   const loadData = async () => {
     try {
-      setIsLoading(true);
-      // On réinitialise l'erreur à chaque chargement
-      setError("");
+      // On ne met pas setIsLoading(true) ici pour éviter l'écran blanc
+      // à chaque petit ajout. On le gère intelligemment.
+
       const [budgetData, catData, txData, membersData] = await Promise.all([
         apiService(`/budgets/${budgetId}`),
         apiService(`/budgets/${budgetId}/categories`),
@@ -62,13 +57,19 @@ function BudgetDetailPage() {
       setCategories(catData);
       setTransactions(txData);
       setMembers(membersData);
-      if (catData.length > 0) setTxCatId(catData[0].id);
+
+      if (catData.length > 0 && !txCatId) setTxCatId(catData[0].id);
     } catch (err) {
       setError(err.message);
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    setIsLoading(true); // On met le chargement seulement au premier affichage
+    loadData();
+  }, [budgetId]);
 
   const fetchHistory = async () => {
     if (!showHistory) {
@@ -81,16 +82,14 @@ function BudgetDetailPage() {
   const handleAddCategory = async (e) => {
     e.preventDefault();
     try {
-      const newCat = await apiService(
-        `/budgets/${budgetId}/categories`,
-        "POST",
-        {
-          name: catName,
-          // Correction 2 : Utilisation de Number.parseFloat
-          monthly_budget: Number.parseFloat(catLimit),
-        }
-      );
-      setCategories([...categories, newCat]);
+      await apiService(`/budgets/${budgetId}/categories`, "POST", {
+        name: catName,
+        monthly_budget: Number.parseFloat(catLimit),
+      });
+
+      // --- CORRECTION ICI AUSSI ---
+      await loadData();
+
       setCatName("");
       setCatLimit("");
     } catch (err) {
@@ -130,7 +129,6 @@ function BudgetDetailPage() {
     e.preventDefault();
     const payload = {
       description: txDesc,
-      // Correction 2 : Utilisation de Number.parseFloat
       amount: Number.parseFloat(txAmount),
       type: txType,
       transaction_date: txDate,
@@ -139,23 +137,18 @@ function BudgetDetailPage() {
 
     try {
       if (editingTxId) {
-        const updatedTx = await apiService(
-          `/transactions/${editingTxId}`,
-          "PUT",
-          payload
-        );
-        setTransactions(
-          transactions.map((tx) => (tx.id === editingTxId ? updatedTx : tx))
-        );
+        await apiService(`/transactions/${editingTxId}`, "PUT", payload);
         setEditingTxId(null);
       } else {
-        const newTx = await apiService(
-          `/budgets/${budgetId}/transactions`,
-          "POST",
-          payload
-        );
-        setTransactions([newTx, ...transactions]);
+        await apiService(`/budgets/${budgetId}/transactions`, "POST", payload);
       }
+
+      // --- CORRECTION ICI ---
+      // Au lieu de setTransactions([...]), on recharge tout !
+      // Cela mettra à jour les graphiques, les totaux catégories ET le nom de l'utilisateur
+      await loadData();
+
+      // Reset du formulaire
       setTxDesc("");
       setTxAmount("");
     } catch (err) {
