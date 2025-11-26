@@ -1,6 +1,7 @@
 // src/services/apiService.js
 
-const API_URL = "http://localhost:3000/api";
+// CORRECTION : On utilise la variable d'environnement (Vercel) ou localhost (Dev)
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 // Notre "assistant"
 const apiService = async (endpoint, method = "GET", body = null) => {
