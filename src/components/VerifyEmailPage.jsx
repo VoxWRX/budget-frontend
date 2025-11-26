@@ -16,7 +16,13 @@ function VerifyEmailPage() {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/verify-email", {
+        // CORRECTION : On utilise la variable d'environnement !
+        // Si on est sur Vercel, ça sera l'URL de Render.
+        // Si on est en local, ça sera localhost:3000 (ou ce qui est dans .env).
+        const API_URL =
+          import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+
+        const response = await fetch(`${API_URL}/verify-email`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ token }),
@@ -28,13 +34,12 @@ function VerifyEmailPage() {
           setStatus("success");
         } else {
           setStatus("error");
-          setMsg(data.error);
+          setMsg(data.error || "Erreur inconnue");
         }
       } catch (err) {
-        console.error("Erreur lors de la vérification :", err);
-
+        console.error(err);
         setStatus("error");
-        setMsg("Erreur de connexion.");
+        setMsg("Erreur de connexion au serveur.");
       }
     };
 
