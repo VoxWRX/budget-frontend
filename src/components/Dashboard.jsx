@@ -121,11 +121,19 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        {/* 3. Afficher le nom de l'utilisateur ! */}
         <div className="header-title">
-          {/* user?.name utilise "l'optional chaining" au cas où user est null */}
-          <h1>Bonjour, {user?.name} !</h1>
-          <p>Bienvenue sur votre tableau de bord.</p>
+          {/* NOUVEAU : LOGO + TITRE */}
+          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+            <img
+              src="/bplan(1).svg"
+              alt="Logo"
+              style={{ height: "50px", width: "auto" }}
+            />
+            <div>
+              <h1>Bonjour, {user?.name} !</h1>
+              <p>Bienvenue sur votre tableau de bord.</p>
+            </div>
+          </div>
         </div>
         <div className="header-actions">
           <Link to="/invitations" className="profile-link-btn relative-btn">

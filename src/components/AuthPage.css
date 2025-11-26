@@ -89,3 +89,14 @@
     margin-bottom: 1rem;
     font-size: 0.9rem;
 }
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.auth-logo {
+    height: 60px; /* Ajuste la taille selon ton logo */
+    width: auto;
+}

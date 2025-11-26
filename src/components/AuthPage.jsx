@@ -68,6 +68,13 @@ function AuthPage() {
   return (
     <div className="auth-container">
       <form onSubmit={handleSubmit} className="auth-form">
+        <div className="logo-container">
+          <img
+            src="/bplan(1).svg"
+            alt="Budget Planner Logo"
+            className="auth-logo"
+          />
+        </div>
         <h2>{isLogin ? "Connexion" : "Inscription"}</h2>
 
         {!isLogin && (
