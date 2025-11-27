@@ -12,19 +12,16 @@ export default defineConfig({
       output: {
         // C'est ici qu'on configure le découpage manuel
         manualChunks(id) {
-          // Si le fichier vient de node_modules (les librairies)
           if (id.includes("node_modules")) {
-            // On isole Recharts car c'est très lourd
+            // On isole SEULEMENT Recharts (c'est lui le plus lourd)
             if (id.includes("recharts")) {
               return "recharts";
             }
 
-            // On isole React et React-DOM
-            if (id.includes("react")) {
-              return "react-vendor";
-            }
-
-            // Le reste des librairies va dans un fichier 'vendor' générique
+            // --- MODIFICATION ICI ---
+            // On a supprimé le bloc qui isolait 'react' et 'react-dom'.
+            // On met tout le reste (y compris React) dans un fichier "vendor" unique.
+            // C'est beaucoup plus sûr pour éviter les bugs de chargement.
             return "vendor";
           }
         },
