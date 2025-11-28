@@ -9,11 +9,15 @@ function ProfilePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  // États du formulaire
   const [name, setName] = useState(user?.name || "");
   const [phone, setPhone] = useState(user?.phone_number || "");
+
+  // NOUVEAUX ÉTATS (Remplacent l'ancien 'avatar')
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(user?.avatar_url || "");
 
+  // États de personnalisation
   const [darkMode, setDarkMode] = useState(false);
   const [primaryColor, setPrimaryColor] = useState("#4361ee");
 
@@ -39,10 +43,8 @@ function ProfilePage() {
     }
   }, []);
 
-  // CORRECTION : Fonction moderne sans méthodes dépréciées
   const adjustColor = (color, amount) => {
     const hex = color.replace("#", "");
-    // On sépare R, G, B proprement
     const r = Number.parseInt(hex.substring(0, 2), 16);
     const g = Number.parseInt(hex.substring(2, 4), 16);
     const b = Number.parseInt(hex.substring(4, 6), 16);
@@ -51,7 +53,6 @@ function ProfilePage() {
     const newG = Math.min(255, Math.max(0, g + amount));
     const newB = Math.min(255, Math.max(0, b + amount));
 
-    // Convertir en hex et ajouter des zéros si nécessaire (padEnd/slice)
     const rr = (newR.toString(16).length === 1 ? "0" : "") + newR.toString(16);
     const gg = (newG.toString(16).length === 1 ? "0" : "") + newG.toString(16);
     const bb = (newB.toString(16).length === 1 ? "0" : "") + newB.toString(16);
@@ -63,7 +64,6 @@ function ProfilePage() {
     const file = e.target.files[0];
     if (file) {
       setSelectedFile(file);
-      // Créer une URL temporaire pour voir l'image tout de suite
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
@@ -74,21 +74,16 @@ function ProfilePage() {
     setMessage("");
 
     try {
-      // IMPORTANT : On utilise FormData pour envoyer des fichiers
       const formData = new FormData();
       formData.append("name", name);
       if (phone) formData.append("phone_number", phone);
 
-      // Si un nouveau fichier est choisi, on l'ajoute
       if (selectedFile) {
         formData.append("avatar", selectedFile);
       } else {
-        // Sinon on renvoie l'ancienne URL pour ne pas la perdre
         formData.append("avatar_url", user?.avatar_url || "");
       }
 
-      // Note: On doit modifier apiService pour accepter FormData,
-      // ou faire un fetch manuel ici. Faisons un fetch manuel pour simplifier ce cas spécifique.
       const token = localStorage.getItem("token");
       const API_URL =
         import.meta.env.VITE_API_URL || "http://localhost:3000/api";
@@ -97,8 +92,6 @@ function ProfilePage() {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
-          // NE PAS METTRE 'Content-Type': 'application/json' !
-          // Le navigateur le mettra automatiquement en 'multipart/form-data'
         },
         body: formData,
       });
@@ -148,7 +141,6 @@ function ProfilePage() {
       <div className="profile-card">
         <div className="profile-header">
           <div className="avatar-circle">
-            {/* On affiche la prévisualisation */}
             {previewUrl ? (
               <img src={previewUrl} alt="Avatar" />
             ) : (
@@ -156,7 +148,6 @@ function ProfilePage() {
             )}
           </div>
 
-          {/* NOUVEAU : Bouton caché pour changer l'image */}
           <label htmlFor="file-upload" className="upload-btn">
             Changer la photo
           </label>
@@ -165,14 +156,13 @@ function ProfilePage() {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            style={{ display: "none" }} // On cache l'input moche
+            style={{ display: "none" }}
           />
         </div>
 
         {message && <div className="success-msg">{message}</div>}
 
         <form onSubmit={handleUpdateProfile}>
-          {/* CORRECTION S6853 : Ajout de htmlFor et id */}
           <div className="form-group">
             <label htmlFor="profile-name">Nom complet</label>
             <input
@@ -197,7 +187,6 @@ function ProfilePage() {
 
           <div className="form-group">
             <label htmlFor="profile-phone">Numéro de téléphone</label>
-            {/* CORRECTION TÉLÉPHONE : type="tel", pas de regex stricte */}
             <input
               id="profile-phone"
               type="tel"
@@ -207,16 +196,7 @@ function ProfilePage() {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="profile-avatar">URL Photo de profil</label>
-            <input
-              id="profile-avatar"
-              type="url"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-              placeholder="https://example.com/photo.jpg"
-            />
-          </div>
+          {/* J'AI SUPPRIMÉ L'ANCIEN CHAMP INPUT URL ICI CAR IL CRÉAIT L'ERREUR */}
 
           <button type="submit" className="save-btn" disabled={isLoading}>
             {isLoading ? "Enregistrement..." : "Sauvegarder les modifications"}
@@ -234,12 +214,9 @@ function ProfilePage() {
               type="checkbox"
               checked={darkMode}
               onChange={toggleDarkMode}
-              // Bonne pratique : ajouter aria-label sur l'input aussi
               aria-label="Activer le mode sombre"
             />
             <span className="slider round"></span>
-
-            {/* CORRECTION S6853 : Texte caché mais accessible pour le label */}
             <span
               style={{
                 position: "absolute",
@@ -257,6 +234,7 @@ function ProfilePage() {
             </span>
           </label>
         </div>
+
         <div className="custom-row">
           <label htmlFor="color-picker">Couleur Principale</label>
           <input
