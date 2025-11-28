@@ -210,6 +210,36 @@ function BudgetDetailPage() {
     }
   };
 
+  const handleDeleteTransaction = async (e, txId) => {
+    e.stopPropagation(); // Empêche d'ouvrir le mode édition quand on clique sur supprimer
+    if (!confirm("Voulez-vous vraiment supprimer cette transaction ?")) return;
+
+    try {
+      await apiService(`/transactions/${txId}`, "DELETE");
+      // Mise à jour intelligente : on recharge tout pour recalculer les graphiques
+      loadData();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const handleDeleteCategory = async (e, catId) => {
+    e.stopPropagation();
+    if (
+      !confirm(
+        "Supprimer cette catégorie ? (Les transactions liées resteront mais sans catégorie)"
+      )
+    )
+      return;
+
+    try {
+      await apiService(`/categories/${catId}`, "DELETE");
+      loadData();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   if (isLoading) return <div className="loading-message">Chargement...</div>;
 
   return (
@@ -424,6 +454,16 @@ function BudgetDetailPage() {
                             transition: "width 0.3s",
                           }}
                         ></div>
+                        {/* NOUVEAU : Bouton supprimer positionné en absolu ou flex */}
+                        <button
+                          type="button"
+                          className="delete-btn-icon"
+                          onClick={(e) => handleDeleteCategory(e, cat.id)}
+                          title="Supprimer cette catégorie"
+                          aria-label="Supprimer"
+                        >
+                          &times;
+                        </button>
                       </div>
 
                       <div
@@ -546,6 +586,16 @@ function BudgetDetailPage() {
                     {tx.type === "income" ? "+" : "-"}
                     {formatCurrency(tx.amount)}
                   </span>
+
+                  <button
+                    type="button"
+                    className="delete-btn-icon-tx"
+                    onClick={(e) => handleDeleteTransaction(e, tx.id)}
+                    title="Supprimer cette transaction"
+                    aria-label="Supprimer"
+                  >
+                    &times;
+                  </button>
                 </button>
               </li>
             ))}

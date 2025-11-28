@@ -223,6 +223,46 @@
     padding: 5px;
     border-radius: 4px;
     transition: background-color 0.2s;
+
+    position: relative; /* Pour positionner la croix */
+    padding-right: 30px; /* Faire de la place pour la croix */
+}
+
+
+.delete-btn-icon {
+    /* Reset du style bouton par défaut */
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    
+    /* Notre style personnalisé */
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 24px; /* Un peu plus grand pour être cliquable */
+    height: 24px;
+    background: #ffcccc;
+    color: #d63031;
+    border-radius: 50%;
+    
+    /* Centrage du X */
+    display: none; /* Caché par défaut */
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1;
+    z-index: 10;
+}
+
+.category-item:hover .delete-btn-icon {
+    display: flex; /* On utilise flex pour bien centrer le X */
+}
+
+.delete-btn-icon:hover {
+    background: #d63031;
+    color: white;
 }
 
 /* L'effet au survol */
@@ -257,7 +297,8 @@
 
     /* On remet notre grille ICI */
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    /* On change la grille pour ajouter une 4ème colonne pour la croix */
+    grid-template-columns: 2fr 1fr 1fr 30px; 
     gap: 1rem;
     align-items: center;
     
@@ -275,6 +316,37 @@
     outline: 2px solid var(--electric-sapphire);
     border-radius: 4px;
     background-color: #f0f8ff;
+}
+
+.delete-btn-icon-tx {
+    /* Reset du style bouton par défaut */
+    appearance: none;
+    border: none;
+    background: transparent; /* Fond transparent par défaut */
+    cursor: pointer;
+    padding: 0;
+
+    /* Notre style personnalisé */
+    color: #ccc;
+    font-weight: bold;
+    font-size: 1.4rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    visibility: hidden; /* Caché par défaut */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tx-row-button:hover .delete-btn-icon-tx {
+    visibility: visible;
+}
+
+.delete-btn-icon-tx:hover {
+    color: #d63031;
+    background: #ffcccc; /* Petit fond rouge au survol */
 }
 
 /* ... Les styles .tx-desc, .tx-date, .tx-amount RESTENT LES MÊMES ... */
