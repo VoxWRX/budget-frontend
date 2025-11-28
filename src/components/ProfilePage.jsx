@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import apiService from "../services/apiService";
+// import apiService from "../services/apiService";
 import { Link } from "react-router-dom";
 import "./ProfilePage.css";
 
@@ -12,10 +12,10 @@ function ProfilePage() {
   // États du formulaire
   const [name, setName] = useState(user?.name || "");
   const [phone, setPhone] = useState(user?.phone_number || "");
+  const [previewUrl, setPreviewUrl] = useState(user?.avatar_url || "");
 
   // NOUVEAUX ÉTATS (Remplacent l'ancien 'avatar')
   const [selectedFile, setSelectedFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(user?.avatar_url || "");
 
   // États de personnalisation
   const [darkMode, setDarkMode] = useState(false);
@@ -42,6 +42,14 @@ function ProfilePage() {
       );
     }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name || "");
+      setPhone(user.phone_number || "");
+      setPreviewUrl(user.avatar_url || "");
+    }
+  }, [user]);
 
   const adjustColor = (color, amount) => {
     const hex = color.replace("#", "");
