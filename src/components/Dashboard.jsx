@@ -121,55 +121,92 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <div className="header-title">
-          {/* NOUVEAU : LOGO + TITRE */}
-          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            <img
-              src="/bplan(1).svg"
-              alt="Logo"
-              style={{ height: "50px", width: "auto" }}
-            />
-            <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-              {/* MODIFICATION : Afficher l'avatar utilisateur ou le logo */}
-              {user?.avatar_url ? (
-                <img
-                  src={user.avatar_url}
-                  alt="Profil"
-                  style={{
-                    height: "60px",
-                    width: "60px",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    border: "2px solid white",
-                  }}
-                />
-              ) : (
-                <img
-                  src="/logo.svg"
-                  alt="Logo"
-                  style={{ height: "50px", width: "auto" }}
-                />
-              )}
-
-              <div>
-                <h1>Bonjour, {user?.name} !</h1>
-                <p>Bienvenue sur votre tableau de bord.</p>
-              </div>
-            </div>
-          </div>
+        {/* PARTIE GAUCHE : Juste le Logo et le Titre de l'app */}
+        <div
+          className="header-brand"
+          style={{ display: "flex", alignItems: "center", gap: "10px" }}
+        >
+          <img
+            src="/bplan(1).svg"
+            alt="Logo"
+            style={{ height: "40px", width: "auto" }}
+          />
+          <h2 style={{ margin: 0, color: "white", fontSize: "1.5rem" }}>
+            Budget Planner
+          </h2>
         </div>
-        <div className="header-actions">
+
+        {/* PARTIE DROITE : Actions + Info Utilisateur */}
+        <div
+          className="header-actions"
+          style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}
+        >
           <Link to="/invitations" className="profile-link-btn relative-btn">
             💌 Invitations
             {invitCount > 0 && (
               <span className="notification-badge">{invitCount}</span>
             )}
           </Link>
+
           <Link to="/profile" className="profile-link-btn">
             Mon Profil 👤
           </Link>
-          <button onClick={logout} className="logout-button">
-            Se déconnecter
+
+          {/* BLOC UTILISATEUR (Déplacé ici) */}
+          <div
+            className="user-info-display"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              borderLeft: "1px solid rgba(255,255,255,0.3)",
+              paddingLeft: "1.5rem",
+            }}
+          >
+            <div style={{ textAlign: "right", lineHeight: "1.2" }}>
+              <div style={{ fontWeight: "bold", fontSize: "0.9rem" }}>
+                {user?.name}
+              </div>
+              <div style={{ fontSize: "0.75rem", opacity: 0.8 }}>Connecté</div>
+            </div>
+
+            {user?.avatar_url ? (
+              <img
+                src={user.avatar_url}
+                alt="Profil"
+                style={{
+                  height: "40px",
+                  width: "40px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "2px solid white",
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  height: "40px",
+                  width: "40px",
+                  borderRadius: "50%",
+                  background: "white",
+                  color: "#333",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                }}
+              >
+                {user?.name?.charAt(0).toUpperCase()}
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={logout}
+            className="logout-button"
+            title="Se déconnecter"
+          >
+            🛑
           </button>
         </div>
       </header>
