@@ -156,6 +156,16 @@ function ProfilePage() {
             )}
           </div>
 
+          {/* --- NOUVEAU : Affichage des infos sous l'image --- */}
+          <div className="profile-identity">
+            <h2>{name}</h2>
+            <p className="identity-item">📧 {user?.email}</p>
+            {user?.phone_number && (
+              <p className="identity-item">📱 {user.phone_number}</p>
+            )}
+          </div>
+          {/* ------------------------------------------------ */}
+
           <label htmlFor="file-upload" className="upload-btn">
             Changer la photo
           </label>

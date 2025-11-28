@@ -41,6 +41,29 @@ body.dark-mode select {
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
+    text-align: center; /* Pour bien centrer le texte */
+}
+
+/* NOUVEAU STYLE POUR L'IDENTITÉ */
+.profile-identity h2 {
+    margin: 10px 0 5px 0;
+    color: var(--indigo-bloom);
+    font-size: 1.8rem;
+}
+
+.identity-item {
+    margin: 2px 0;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Ajustement mode sombre pour le texte */
+body.dark-mode .profile-identity h2 {
+    color: var(--electric-sapphire);
+}
+body.dark-mode .identity-item {
+    color: #bbb;
 }
 
 .avatar-circle {
