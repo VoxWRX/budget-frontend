@@ -161,3 +161,33 @@ input:checked + .slider:before { transform: translateX(26px); }
 .upload-btn:hover {
     color: var(--indigo-bloom);
 }
+
+/* --- LE BOUTON RETOUR --- */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    
+    /* Couleurs haute visibilité */
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2); /* Fond blanc transparent */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    
+    /* Forme de bouton */
+    padding: 10px 20px;
+    border-radius: 30px; /* Bords très arrondis */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    
+    /* Positionnement */
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px); /* Petit effet de flou derrière */
+}
+
+.back-link:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-5px); /* Petite animation vers la gauche */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
