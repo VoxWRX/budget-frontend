@@ -11,7 +11,8 @@ function ProfilePage() {
 
   const [name, setName] = useState(user?.name || "");
   const [phone, setPhone] = useState(user?.phone_number || "");
-  const [avatar, setAvatar] = useState(user?.avatar_url || "");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(user?.avatar_url || "");
 
   const [darkMode, setDarkMode] = useState(false);
   const [primaryColor, setPrimaryColor] = useState("#4361ee");
@@ -58,16 +59,54 @@ function ProfilePage() {
     return `#${rr}${gg}${bb}`;
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      // Créer une URL temporaire pour voir l'image tout de suite
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage("");
+
     try {
-      const updatedUser = await apiService("/users/profile", "PUT", {
-        name,
-        phone_number: phone,
-        avatar_url: avatar,
+      // IMPORTANT : On utilise FormData pour envoyer des fichiers
+      const formData = new FormData();
+      formData.append("name", name);
+      if (phone) formData.append("phone_number", phone);
+
+      // Si un nouveau fichier est choisi, on l'ajoute
+      if (selectedFile) {
+        formData.append("avatar", selectedFile);
+      } else {
+        // Sinon on renvoie l'ancienne URL pour ne pas la perdre
+        formData.append("avatar_url", user?.avatar_url || "");
+      }
+
+      // Note: On doit modifier apiService pour accepter FormData,
+      // ou faire un fetch manuel ici. Faisons un fetch manuel pour simplifier ce cas spécifique.
+      const token = localStorage.getItem("token");
+      const API_URL =
+        import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+
+      const response = await fetch(`${API_URL}/users/profile`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          // NE PAS METTRE 'Content-Type': 'application/json' !
+          // Le navigateur le mettra automatiquement en 'multipart/form-data'
+        },
+        body: formData,
       });
+
+      const updatedUser = await response.json();
+
+      if (!response.ok) throw new Error(updatedUser.error);
+
       updateUser(updatedUser);
       setMessage("Profil mis à jour avec succès !");
     } catch (err) {
@@ -109,13 +148,25 @@ function ProfilePage() {
       <div className="profile-card">
         <div className="profile-header">
           <div className="avatar-circle">
-            {avatar ? (
-              <img src={avatar} alt="Avatar" />
+            {/* On affiche la prévisualisation */}
+            {previewUrl ? (
+              <img src={previewUrl} alt="Avatar" />
             ) : (
               <span>{name.charAt(0).toUpperCase()}</span>
             )}
           </div>
-          <h2>Mon Profil</h2>
+
+          {/* NOUVEAU : Bouton caché pour changer l'image */}
+          <label htmlFor="file-upload" className="upload-btn">
+            Changer la photo
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={{ display: "none" }} // On cache l'input moche
+          />
         </div>
 
         {message && <div className="success-msg">{message}</div>}

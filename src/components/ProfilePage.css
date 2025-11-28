@@ -149,3 +149,15 @@ input:checked + .slider:before { transform: translateX(26px); }
     cursor: pointer;
     background: none;
 }
+
+.upload-btn {
+    margin-top: 0.5rem;
+    color: var(--electric-sapphire);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+.upload-btn:hover {
+    color: var(--indigo-bloom);
+}

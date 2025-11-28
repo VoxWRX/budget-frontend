@@ -129,9 +129,32 @@ function Dashboard() {
               alt="Logo"
               style={{ height: "50px", width: "auto" }}
             />
-            <div>
-              <h1>Bonjour, {user?.name} !</h1>
-              <p>Bienvenue sur votre tableau de bord.</p>
+            <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+              {/* MODIFICATION : Afficher l'avatar utilisateur ou le logo */}
+              {user?.avatar_url ? (
+                <img
+                  src={user.avatar_url}
+                  alt="Profil"
+                  style={{
+                    height: "60px",
+                    width: "60px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    border: "2px solid white",
+                  }}
+                />
+              ) : (
+                <img
+                  src="/logo.svg"
+                  alt="Logo"
+                  style={{ height: "50px", width: "auto" }}
+                />
+              )}
+
+              <div>
+                <h1>Bonjour, {user?.name} !</h1>
+                <p>Bienvenue sur votre tableau de bord.</p>
+              </div>
             </div>
           </div>
         </div>
