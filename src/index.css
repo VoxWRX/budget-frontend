@@ -1,5 +1,9 @@
 /* src/index.css */
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   /* Ta superbe palette */
   --neon-pink: #f72585ff;
