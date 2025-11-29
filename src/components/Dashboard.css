@@ -205,3 +205,41 @@ body.dark-mode .notification-badge {
     color: white;
     border-color: #ff4d4d;
 }
+
+/* --- RESPONSIVE MOBILE (écrans < 768px) --- */
+@media (max-width: 768px) {
+    
+    .dashboard-container {
+        padding: 1rem; /* Moins de marge sur les côtés */
+    }
+
+    /* 1. Le Header : On empile le logo et les boutons */
+    .dashboard-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start; /* Tout aligné à gauche */
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between; /* Boutons étalés */
+        flex-wrap: wrap; /* Permet aux boutons de passer à la ligne si besoin */
+    }
+
+    /* 2. Le Formulaire de création : On empile l'input et les boutons */
+    .budget-creator form {
+        flex-direction: column;
+    }
+
+    .budget-creator input, 
+    .budget-creator select, 
+    .budget-creator button {
+        width: 100%; /* Pleine largeur pour être facile à toucher */
+        margin-bottom: 0.5rem;
+    }
+
+    /* 3. La liste des budgets : 1 seule colonne */
+    .budgets-list {
+        grid-template-columns: 1fr; /* Une seule colonne */
+    }
+}

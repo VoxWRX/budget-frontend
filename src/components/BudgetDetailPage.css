@@ -550,3 +550,55 @@
 .invite-form input { flex: 1; padding: 0.5rem; border-radius: 4px; border: none; }
 .invite-form button { background: var(--neon-pink); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
 .invite-status { margin-top: 0.5rem; font-size: 0.9rem; color: #eee; font-style: italic; }
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+
+    .budget-detail-container {
+        padding: 1rem;
+    }
+
+    /* 1. L'en-tête du budget */
+    .budget-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .action-buttons {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+    
+    .secondary-btn {
+        flex: 1; /* Les boutons prennent toute la largeur dispo */
+        text-align: center;
+    }
+
+    /* 2. Les Graphiques (Résumé) */
+    .summary-cards {
+        flex-direction: column; /* Cartes les unes sous les autres */
+    }
+
+    /* 3. Les Colonnes principales (Catégories / Transactions) */
+    .columns-container {
+        flex-direction: column; /* Vertical au lieu d'horizontal */
+    }
+
+    .column {
+        width: 100%; /* Prend toute la largeur */
+        min-width: 0; /* Évite les débordements */
+    }
+
+    /* 4. Les formulaires dans les colonnes */
+    .transaction-form .form-row,
+    .inline-form {
+        flex-direction: column;
+    }
+    
+    .inline-form button {
+        width: 100%; /* Le bouton "+" devient large */
+        padding: 0.8rem;
+    }
+}

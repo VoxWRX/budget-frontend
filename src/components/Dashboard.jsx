@@ -236,6 +236,7 @@ function Dashboard() {
               <option value="GBP">£ GBP</option>
               <option value="JPY">¥ JPY</option>
               <option value="MAD">MAD</option>
+              <option value="RON">lei (RON)</option>
             </select>
             <button type="submit">Créer</button>
           </form>
