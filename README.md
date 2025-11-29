@@ -50,12 +50,12 @@ L'application est déployée et accessible ici :
 ### 1. Inscription et Vérification
 Créez un compte sécurisé. Un email de confirmation vous sera envoyé pour valider votre identité avant de commencer.
 
-![Page d'inscription](screenshots/register.png)
+![Page d'inscription](bplan screenshots/register page.pdf)
 
 ### 2. Le Tableau de Bord (Dashboard)
 Votre centre de commande. Visualisez tous vos budgets d'un coup d'œil. Vous pouvez voir les invitations reçues via la cloche de notification.
 
-![Tableau de bord](screenshots/dashboard.png)
+![Tableau de bord](bplan screenshots/dashboard page.pdf)
 
 ### 3. Gestion d'un Budget
 Cliquez sur un budget pour voir les détails.
@@ -63,17 +63,17 @@ Cliquez sur un budget pour voir les détails.
 * **Colonne Droite :** Ajoutez vos transactions. Le nom de la personne ayant payé s'affiche à côté.
 * **Haut de page :** Visualisez instantanément le solde restant et la répartition des dépenses.
 
-![Détails du budget](screenshots/budget-detail.png)
+![Détails du budget](bplan screenshots/budget details page.pdf)
 
 ### 4. Collaboration
 Invitez un proche en saisissant son email. Il recevra un lien unique pour rejoindre votre budget. Les modifications sont synchronisées en temps réel.
 
-![Menu Collaboration](screenshots/collaboration.png)
+![Page d'invitation](bplan screenshots/invitations page.pdf)
 
 ### 5. Profil et Personnalisation
 Changez votre photo de profil, activez le **Mode Sombre** ou changez la couleur principale de l'application selon vos goûts.
 
-![Page Profil et Dark Mode](screenshots/profile.png)
+![Page Profil et Dark Mode](bplan screenshots/profile page.pdf)
 
 ---
 
