@@ -108,7 +108,7 @@ Si vous souhaitez cloner et lancer ce projet sur votre machine :
 * Node.js installé
 * PostgreSQL installé (ou une URL de connexion externe)
 
-### 1. Cloner le projet
+### 1. Cloner le Frontend du projet
 ```bash
-git clone [https://github.com/VOTRE_NOM/budget-planner.git](https://github.com/VOTRE_NOM/budget-planner.git)
-cd budget-planner
+git clone [https://github.com/VOTRE_NOM/budget-frontend.git](https://github.com/VOTRE_NOM/budget-frontend.git)
+cd budget-frontend
