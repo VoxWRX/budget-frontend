@@ -109,6 +109,22 @@ Si vous souhaitez cloner et lancer ce projet sur votre machine :
 * PostgreSQL installé (ou une URL de connexion externe)
 
 ### 1. Cloner le Frontend du projet
-```bash
+bash
+
 git clone [https://github.com/VOTRE_NOM/budget-frontend.git](https://github.com/VOTRE_NOM/budget-frontend.git)
 cd budget-frontend
+
+### 2. Configuration Frontend
+bash
+
+cd budget-frontend
+npm install
+
+Créez un fichier .env.local :
+
+VITE_API_URL=http://localhost:3000/api
+
+Lancez le frontend :
+bash
+
+npm run dev
