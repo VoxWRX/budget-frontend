@@ -18,7 +18,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 > **BPlan** est une application web complète de gestion de finances personnelles et collaboratives. Elle permet aux utilisateurs de suivre leurs dépenses, de visualiser leurs économies et de gérer des budgets communs en temps réel.
 
-![Bannière ou Logo du projet](public/logo.svg)
+![Bannière ou Logo du projet](public/bplan(1).svg)
 
 ---
 
