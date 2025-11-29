@@ -206,7 +206,7 @@ function Dashboard() {
             className="logout-button"
             title="Se déconnecter"
           >
-            🛑
+            Se deconnecter 🛑
           </button>
         </div>
       </header>
